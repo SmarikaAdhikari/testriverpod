@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testriverpod/provider/future_provider.dart';
-// import 'package:get/get.dart';
-
-// import 'productpage.dart';
+import 'package:testriverpod/provider/provider.dart';
+import 'package:testriverpod/provider/stream_provider.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -14,19 +12,56 @@ class Homepage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Homepage'),
         ),
-        body: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const FutureProviderPage()),
-                );
-              },
-              child: const Text('Products'),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                  // width: 80,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FutureProviderPage()),
+                    );
+                  },
+                  child: const Text('Future Provider',
+                      style: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StreamProviderPage()),
+                    );
+                  },
+                  child: const Text('Streams', style: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProviderPage()),
+                    );
+                  },
+                  child:
+                      const Text('Providers', style: TextStyle(fontSize: 20)),
+                ),
+              ],
             ),
-          ],
+          ),
         ));
   }
 }
