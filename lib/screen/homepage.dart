@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:testriverpod/provider/change_notifier.dart';
 import 'package:testriverpod/provider/future_provider.dart';
 import 'package:testriverpod/provider/provider.dart';
+import 'package:testriverpod/provider/state_notifier.dart';
+import 'package:testriverpod/provider/state_provider.dart';
 import 'package:testriverpod/provider/stream_provider.dart';
 
 class Homepage extends StatelessWidget {
@@ -58,6 +61,48 @@ class Homepage extends StatelessWidget {
                   },
                   child:
                       const Text('Providers', style: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StateProviderPage()),
+                    );
+                  },
+                  child: const Text('State Providers',
+                      style: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ChangeNotifierPage()),
+                    );
+                  },
+                  child: const Text('Change Notifier',
+                      style: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StateNotifierPage()),
+                    );
+                  },
+                  child: const Text('State Notifier',
+                      style: TextStyle(fontSize: 20)),
                 ),
               ],
             ),
