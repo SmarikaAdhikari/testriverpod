@@ -9,8 +9,8 @@ class StateProviderPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(valueStateProvider);
-    ref.listen<int>(valueStateProvider, (prev, nex) {
-      if (nex == 110) {
+    ref.listen<int>(valueStateProvider, (prev, next) {
+      if (next == 110) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('You have already reached 110')));
       }

@@ -2,24 +2,24 @@
 // import 'dart:js_interop';
 
 class Products {
-  final String type;
-  final String activity;
+  final String description;
+  final int id;
   final double price;
-  final int participants;
+  final String title;
 
   Products({
-    required this.type,
-    required this.activity,
+    required this.description,
+    required this.id,
     required this.price,
-    required this.participants,
+    required this.title,
   });
 
   factory Products.fromJson(Map<String, dynamic> json) {
     return Products(
-      type: json['type'],
-      activity: json['activity'],
+      description: json['description'],
+      id: json['id'],
       price: json['price'],
-      participants: json['participants'],
+      title: json['title'],
     );
   }
 }

@@ -31,7 +31,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                           content: Column(
                             children: [
                               ...CartNotifier.cart
-                                  .map((item) => Text(item.type)),
+                                  .map((item) => Text(item.id.toString())),
                               const SizedBox(height: 16),
                               Text(
                                 'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
@@ -54,18 +54,18 @@ class ChangeNotifierPage extends ConsumerWidget {
                 },
               ),
               Positioned(
-                // right: 0,
-                // top: 6,
+                right: 0,
+                top: 6,
                 child: Container(
                   padding: const EdgeInsets.all(1),
                   decoration: const BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.green,
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
-                  // constraints: const BoxConstraints(
-                  //   minWidth: 16,
-                  //   minHeight: 16,
-                  // ),
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
                   child: Text(
                     CartNotifier.cart.length.toString(),
                     style: const TextStyle(
@@ -79,44 +79,42 @@ class ChangeNotifierPage extends ConsumerWidget {
             ],
           )
         ]),
-        body: Column(children: [
-          Expanded(
-            child: Products.when(
-              data: (data) => ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  // final product = CartNotifier.cart[index];
-                  return Column(
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            ref.read(cartNotifierProvider.notifier).clearCart();
-                          },
-                          child: Text('Remove')),
-                      ListTile(
-                        title: Text(data.type),
-                        subtitle: Text('\$${data.price}'),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.add_shopping_cart),
-                          onPressed: () {
-                            ref
-                                .read(cartNotifierProvider.notifier)
-                                .addProduct(data);
-                          },
-                        ),
+        body: Products.when(
+          data: (data) => Column(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    ref.read(cartNotifierProvider.notifier).clearCart();
+                  },
+                  child: Text('Remove')),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    // final product = CartNotifier.cart[index];
+                    return ListTile(
+                      title: Text(data[index].title),
+                      subtitle: Text('\$${data[index].price}'),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.add_shopping_cart),
+                        onPressed: () {
+                          ref
+                              .read(cartNotifierProvider.notifier)
+                              .addProduct(data[index]);
+                        },
                       ),
-                    ],
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-              error: (Object error, StackTrace stackTrace) {
-                return Text(error.toString());
-              },
-              loading: () {
-                return const CircularProgressIndicator();
-              },
-            ),
+            ],
           ),
-        ]));
+          error: (Object error, StackTrace stackTrace) {
+            return Text(error.toString());
+          },
+          loading: () {
+            return Center(child: const CircularProgressIndicator());
+          },
+        ));
   }
 }
