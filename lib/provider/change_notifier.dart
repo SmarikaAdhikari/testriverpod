@@ -1,7 +1,3 @@
-// import 'dart:js_interop';
-
-// import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,6 +11,7 @@ class ChangeNotifierPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // ignore: non_constant_identifier_names
     final CartNotifier = ref.watch(cartNotifierProvider);
+    // ignore: non_constant_identifier_names
     final Products = ref.watch(suggestionFutureProvider);
     return Scaffold(
         appBar: AppBar(title: const Text('Change Notifier'), actions: [
@@ -27,18 +24,25 @@ class ChangeNotifierPage extends ConsumerWidget {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Center(child: Text('Cart')),
-                          content: Column(
-                            children: [
-                              ...CartNotifier.cart
-                                  .map((item) => Text(item.id.toString())),
-                              const SizedBox(height: 16),
-                              Text(
-                                'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium,
-                              ),
-                            ],
+                          title: Center(
+                              child:
+                                  Text('Cart', style: TextStyle(fontSize: 30))),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                ...CartNotifier.cart.map((item) => Card(
+                                        child: Text(
+                                      item.title.toString(),
+                                      style: TextStyle(fontSize: 15),
+                                    ))),
+                                const SizedBox(height: 20),
+                                Spacer(),
+                                Text(
+                                  'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              ],
+                            ),
                           ),
                           actions: [
                             TextButton(
@@ -59,7 +63,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                 child: Container(
                   padding: const EdgeInsets.all(1),
                   decoration: const BoxDecoration(
-                    color: Colors.green,
+                    color: Colors.black,
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
                   constraints: const BoxConstraints(
@@ -69,7 +73,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                   child: Text(
                     CartNotifier.cart.length.toString(),
                     style: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 10,
                     ),
                     textAlign: TextAlign.center,
@@ -84,14 +88,15 @@ class ChangeNotifierPage extends ConsumerWidget {
             children: [
               TextButton(
                   onPressed: () {
-                    ref.read(cartNotifierProvider.notifier).clearCart();
+                    ref
+                        .read(cartNotifierProvider.notifier)
+                        .removeProductByIndex;
                   },
                   child: Text('Remove')),
               Expanded(
                 child: ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index) {
-                    // final product = CartNotifier.cart[index];
                     return ListTile(
                       title: Text(data[index].title),
                       subtitle: Text('\$${data[index].price}'),

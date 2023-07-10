@@ -98,7 +98,8 @@ class Homepage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const StateNotifierPage()),
+                          builder: (context) =>
+                              const StateNotifierProviderPage()),
                     );
                   },
                   child: const Text('State Notifier',
