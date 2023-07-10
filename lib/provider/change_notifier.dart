@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testriverpod/model/listtile.dart';
 
 import 'Cart/cart_notifier.dart';
 import 'future_provider.dart';
@@ -23,34 +24,52 @@ class ChangeNotifierPage extends ConsumerWidget {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
-                          title: const Center(
-                              child:
-                                  Text('Cart', style: TextStyle(fontSize: 30))),
-                          content: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                ...CartNotifier.cart.map((item) => Card(
-                                        child: Text(
-                                      item.title.toString(),
-                                      style: const TextStyle(fontSize: 15),
-                                    ))),
-                                Text(
-                                  'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
-                                  style: const TextStyle(fontSize: 25),
-                                ),
-                              ],
+                        return StatefulBuilder(
+                          builder: (context, setState) => AlertDialog(
+                            title: const Center(
+                                child: Text('Cart',
+                                    style: TextStyle(fontSize: 30))),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  ...CartNotifier.cart.map((item) => Card(
+                                          child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              item.title.toString(),
+                                              style:
+                                                  const TextStyle(fontSize: 15),
+                                            ),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                ref
+                                                    .read(cartNotifierProvider
+                                                        .notifier)
+                                                    .removeProduct(item);
+                                                setState(() {});
+                                              },
+                                              icon: const Icon(Icons.delete))
+                                        ],
+                                      ))),
+                                  Text(
+                                    'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
+                                    style: const TextStyle(fontSize: 25),
+                                  ),
+                                ],
+                              ),
                             ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    ref
+                                        .read(cartNotifierProvider.notifier)
+                                        .clearCart();
+                                  },
+                                  child: const Text('Clear Cart'))
+                            ],
                           ),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  ref
-                                      .read(cartNotifierProvider.notifier)
-                                      .clearCart();
-                                },
-                                child: const Text('Clear Cart'))
-                          ],
                         );
                       });
                 },
@@ -95,17 +114,8 @@ class ChangeNotifierPage extends ConsumerWidget {
                 child: ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(data[index].title),
-                      subtitle: Text('\$${data[index].price}'),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.add_shopping_cart),
-                        onPressed: () {
-                          ref
-                              .read(cartNotifierProvider.notifier)
-                              .addProduct(data[index]);
-                        },
-                      ),
+                    return TilePage(
+                      product: data[index],
                     );
                   },
                 ),
