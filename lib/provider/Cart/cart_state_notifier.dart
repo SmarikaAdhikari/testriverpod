@@ -14,6 +14,10 @@ class StateNotifierPage extends StateNotifier<List<Products>> {
     state = [...state, product];
   }
 
+  void removeProduct(Products product) {
+    state = [...state, product];
+  }
+
   void clear() {
     state = [];
   }

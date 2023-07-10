@@ -35,8 +35,6 @@ class ChangeNotifierPage extends ConsumerWidget {
                                       item.title.toString(),
                                       style: const TextStyle(fontSize: 15),
                                     ))),
-                                const SizedBox(height: 20),
-                                const Spacer(),
                                 Text(
                                   'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
                                   style: const TextStyle(fontSize: 25),
@@ -90,7 +88,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                   onPressed: () {
                     ref
                         .read(cartNotifierProvider.notifier)
-                        .removeProductByIndex;
+                        .removeProductByIndex();
                   },
                   child: const Text('Remove')),
               Expanded(
