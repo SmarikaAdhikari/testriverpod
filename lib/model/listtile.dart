@@ -14,8 +14,6 @@ class TilePage extends ConsumerStatefulWidget {
 }
 
 class _TilePageState extends ConsumerState<TilePage> {
-  // Icon icon = Icon(Icons.add_shopping_cart);
-
   @override
   Widget build(BuildContext context) {
     final counter = ref.watch(counterProvider);
@@ -27,9 +25,17 @@ class _TilePageState extends ConsumerState<TilePage> {
       trailing: IconButton(
         icon: Icon(counter ? Icons.check : Icons.add_shopping_cart),
         onPressed: () {
-          ref.read(cartNotifierProvider.notifier);
-          cart.addProduct(widget.product);
-          ref.read(counterProvider.notifier).toggleIcon();
+          if (counter == false) {
+            ref.read(cartNotifierProvider.notifier);
+            cart.addProduct(widget.product);
+            ref.read(counterProvider.notifier).toggleIcon();
+            return;
+          } else {
+            ref.read(cartNotifierProvider.notifier);
+            cart.removeProduct(widget.product);
+            ref.read(counterProvider.notifier).toggleIcon();
+            return;
+          }
         },
       ),
     );

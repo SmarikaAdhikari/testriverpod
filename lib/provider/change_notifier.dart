@@ -10,6 +10,7 @@ class ChangeNotifierPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // print('ChangeNotifierPage rebuild');
     // ignore: non_constant_identifier_names
     final CartNotifier = ref.watch(cartNotifierProvider);
     // ignore: non_constant_identifier_names
