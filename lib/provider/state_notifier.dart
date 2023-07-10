@@ -85,6 +85,13 @@ class StateNotifierProviderPage extends ConsumerWidget {
         body: Products.when(
           data: (data) => Column(
             children: [
+              TextButton(
+                  onPressed: () {
+                    ref
+                        .read(cartStateNotifierProvider.notifier)
+                        .removeProduct(data[0]);
+                  },
+                  child: const Text('Remove')),
               const SizedBox(height: 16),
               Expanded(
                 child: ListView.builder(
