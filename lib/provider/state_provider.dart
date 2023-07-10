@@ -24,7 +24,7 @@ class StateProviderPage extends ConsumerWidget {
           Text(
             'The value is $value.',
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(
@@ -33,7 +33,7 @@ class StateProviderPage extends ConsumerWidget {
             },
             child: const Text('Increment'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(
@@ -42,7 +42,7 @@ class StateProviderPage extends ConsumerWidget {
             },
             child: const Text('Decrement'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(

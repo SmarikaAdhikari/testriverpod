@@ -17,7 +17,7 @@ class StreamProviderPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stream Provider'),
+        title: const Text('Stream Provider'),
       ),
       body: Center(
         child: streamValue.when(data: (int data) {

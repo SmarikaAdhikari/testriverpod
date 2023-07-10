@@ -20,7 +20,7 @@ class Homepage extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                   // width: 80,
                 ),
@@ -35,7 +35,7 @@ class Homepage extends StatelessWidget {
                   child: const Text('Future Provider',
                       style: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -48,7 +48,7 @@ class Homepage extends StatelessWidget {
                   },
                   child: const Text('Streams', style: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -62,7 +62,7 @@ class Homepage extends StatelessWidget {
                   child:
                       const Text('Providers', style: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -76,7 +76,7 @@ class Homepage extends StatelessWidget {
                   child: const Text('State Providers',
                       style: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -90,7 +90,7 @@ class Homepage extends StatelessWidget {
                   child: const Text('Change Notifier',
                       style: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(

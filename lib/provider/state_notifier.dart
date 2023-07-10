@@ -12,6 +12,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartStateNotifierProvider);
+    // ignore: non_constant_identifier_names
     final Products = ref.watch(suggestionFutureProvider);
     return Scaffold(
         appBar: AppBar(
@@ -112,7 +113,7 @@ class StateNotifierProviderPage extends ConsumerWidget {
             return Text(error.toString());
           },
           loading: () {
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
         ));
   }

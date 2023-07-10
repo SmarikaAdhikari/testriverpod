@@ -6,6 +6,7 @@ import 'package:testriverpod/services/api_service.dart';
 
 final suggestionFutureProvider =
     FutureProvider.autoDispose<List<Products>>((ref) async {
+  // ignore: non_constant_identifier_names
   final ApiService = ref.watch(apiServiceProvider);
   return ApiService.getProducts();
 });
@@ -15,6 +16,7 @@ class FutureProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ignore: non_constant_identifier_names
     final FutureProvider = ref.watch(suggestionFutureProvider);
     // final index = ref.watch(suggestionFutureProvider);
     return Scaffold(

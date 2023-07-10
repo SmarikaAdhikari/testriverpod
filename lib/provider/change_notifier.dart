@@ -18,13 +18,13 @@ class ChangeNotifierPage extends ConsumerWidget {
           Stack(
             children: [
               IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: const Icon(Icons.shopping_cart),
                 onPressed: () {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Center(
+                          title: const Center(
                               child:
                                   Text('Cart', style: TextStyle(fontSize: 30))),
                           content: SingleChildScrollView(
@@ -33,13 +33,13 @@ class ChangeNotifierPage extends ConsumerWidget {
                                 ...CartNotifier.cart.map((item) => Card(
                                         child: Text(
                                       item.title.toString(),
-                                      style: TextStyle(fontSize: 15),
+                                      style: const TextStyle(fontSize: 15),
                                     ))),
                                 const SizedBox(height: 20),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   'Total: \$${CartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
-                                  style: TextStyle(fontSize: 25),
+                                  style: const TextStyle(fontSize: 25),
                                 ),
                               ],
                             ),
@@ -51,7 +51,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                                       .read(cartNotifierProvider.notifier)
                                       .clearCart();
                                 },
-                                child: Text('Clear Cart'))
+                                child: const Text('Clear Cart'))
                           ],
                         );
                       });
@@ -92,7 +92,7 @@ class ChangeNotifierPage extends ConsumerWidget {
                         .read(cartNotifierProvider.notifier)
                         .removeProductByIndex;
                   },
-                  child: Text('Remove')),
+                  child: const Text('Remove')),
               Expanded(
                 child: ListView.builder(
                   itemCount: data.length,
@@ -118,7 +118,7 @@ class ChangeNotifierPage extends ConsumerWidget {
             return Text(error.toString());
           },
           loading: () {
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
         ));
   }
