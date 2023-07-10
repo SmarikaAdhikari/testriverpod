@@ -15,8 +15,12 @@ class StateNotifierPage extends StateNotifier<List<Products>> {
   }
 
   void removeProduct(Products product) {
-    state = [...state, product];
+    state = [...state]..removeLast();
   }
+
+  // void toggleIcon() {
+  //   state = [...state, state.last];
+  // }
 
   void clear() {
     state = [];
