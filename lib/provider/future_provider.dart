@@ -18,7 +18,6 @@ class FutureProviderPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // ignore: non_constant_identifier_names
     final FutureProvider = ref.watch(suggestionFutureProvider);
-    // final index = ref.watch(suggestionFutureProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Future Provider'),

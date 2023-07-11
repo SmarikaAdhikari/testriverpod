@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:testriverpod/model/listtile.dart';
+// import 'package:testriverpod/model/listtile.dart';
 
 import 'Cart/cart_notifier.dart';
 import 'future_provider.dart';
@@ -10,7 +10,6 @@ class ChangeNotifierPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // print('ChangeNotifierPage rebuild');
     // ignore: non_constant_identifier_names
     final CartNotifier = ref.watch(cartNotifierProvider);
     // ignore: non_constant_identifier_names
@@ -115,8 +114,24 @@ class ChangeNotifierPage extends ConsumerWidget {
                 child: ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index) {
-                    return TilePage(
-                      product: data[index],
+                    //
+                    return ListTile(
+                      title: Text(data[index].title),
+                      subtitle: Text('\$${data[index].price}'),
+                      trailing: IconButton(
+                        icon: Icon(CartNotifier.cart.contains(data[index])
+                            ? Icons.check
+                            : Icons.add_shopping_cart),
+                        onPressed: () {
+                          CartNotifier.cart.contains(data[index])
+                              ? ref
+                                  .read(cartNotifierProvider.notifier)
+                                  .removeProduct(data[index])
+                              : ref
+                                  .read(cartNotifierProvider.notifier)
+                                  .addProduct(data[index]);
+                        },
+                      ),
                     );
                   },
                 ),
