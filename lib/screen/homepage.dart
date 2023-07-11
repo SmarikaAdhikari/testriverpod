@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:testriverpod/provider/Cart/cart_state_notifier.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testriverpod/provider/change_notifier.dart';
 import 'package:testriverpod/provider/future_provider.dart';
 import 'package:testriverpod/provider/provider.dart';
@@ -6,14 +9,27 @@ import 'package:testriverpod/provider/state_notifier.dart';
 import 'package:testriverpod/provider/state_provider.dart';
 import 'package:testriverpod/provider/stream_provider.dart';
 
-class Homepage extends StatelessWidget {
+import '../provider/Cart/cart_notifier.dart';
+
+class Homepage extends ConsumerWidget {
   const Homepage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ignore: non_constant_identifier_names
+    final CartNotifier = ref.watch(cartNotifierProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Homepage'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                ref.read(cartNotifierProvider.notifier);
+              },
+              child: Text(CartNotifier.cart.length.toString(),
+                  style: const TextStyle(color: Colors.black)),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -22,7 +38,6 @@ class Homepage extends StatelessWidget {
               children: [
                 const SizedBox(
                   height: 20,
-                  // width: 80,
                 ),
                 ElevatedButton(
                   onPressed: () {
