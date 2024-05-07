@@ -1,25 +1,18 @@
-// import 'package:flutter/material.dart';
-// import 'dart:js_interop';
-
 class Products {
-  final String description;
   final int id;
-  final double price;
   final String title;
+  final double price;
+ final String description;
 
-  Products({
-    required this.description,
-    required this.id,
-    required this.price,
-    required this.title,
-  });
+  Products({required this.id, required this.title, required this.price
+  , required this.description});
 
   factory Products.fromJson(Map<String, dynamic> json) {
     return Products(
-      description: json['description'],
       id: json['id'],
-      price: json['price'],
       title: json['title'],
+      price: json['price'].toDouble(), 
+      description: json['description'],
     );
   }
 }
